@@ -8,34 +8,24 @@ fun resultRefinement (
   }
 }
 
-fun resultCalculation(totalResults: MutableList<Int>, nmbrOfDiscards: Int) {
-        var discardedResults = arrayOf(0,0,0) // max 3 discards supported
-        val sumOfAllRaces = totalResults.sum()
-	val results = Results(totalResults)   // intitialize the class Results
-        println("Total race results before discards: $totalResults")
+fun resultCalculation(totalResults: MutableList<Int>, nmbrOfDiscards: Int = 1) {
+    val sumOfAllRaces = totalResults.sum()
+	val sortedRaceResults = totalResults.sorted()
+	println("Sorted list of race results: $sortedRaceResults")
+	val results = Results(sortedRaceResults)   // intitialize the class Results
+    println("List of sail results before discards: $totalResults")
 	println("Sum of all races: $sumOfAllRaces")
 
-	var raceNmbr: Int
-	var worstRace: Int
 
 	results.resultRefinement { x: List<Int> ->
-	for (i in 0..nmbrOfDiscards-1) {      // loop through all race results for each discard
-		raceNmbr = 0
-		worstRace = 0
-		for (raceResult in x) {
-			if (raceResult > discardedResults[i]) {
-			    worstRace = raceNmbr
-                            discardedResults[i] = raceResult
-		    }
-		    raceNmbr++	
-	    	}
-		println("Found one discard, race number: $worstRace")
-		totalResults[worstRace] = 0  // set the race result to 0 so it does not confuse next search for highest result
+	  val lastIndex = x.count()-1
+	  var sumOfDiscards = 0
+	  for (i in 0..nmbrOfDiscards-1) {      // loop through the last race results in the sorted list
+            sumOfDiscards = sumOfDiscards + x[lastIndex - i]
+	  }
+
+	sumOfAllRaces - sumOfDiscards
 	}
-	sumOfAllRaces - discardedResults.sum()
-	}
-        println("Results with no discards: $sumOfAllRaces")
-	println("Results list after removing discarded races: $totalResults")
 }
 
 
