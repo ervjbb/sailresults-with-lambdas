@@ -1,6 +1,6 @@
 class Results(val totalResult: List<Int>) {
-  fun resultRefinement ( resultPolish: ( List<Int> ) -> Int ) {       // this is a lambda funtion
-     val finalResult = resultPolish(totalResult)                               // it has no knowledge of discards!
+  fun resultRefinement ( resultPolish: ( List<Int> ) -> Int ) {           // this is a lambda funtion
+     val finalResult = resultPolish(totalResult)                          // resultRefinement has no knowledge of discard calculations!
      println("Final result: $finalResult")                                     
   }
 }
