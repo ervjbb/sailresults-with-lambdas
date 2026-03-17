@@ -1,37 +1,81 @@
-class Results(val totalResult: List<Int>) {
-  fun resultRefinement ( resultPolish: ( List<Int> ) -> Int ) {           // this is a lambda funtion
-     val finalResult = resultPolish(totalResult)                          // resultRefinement has no knowledge of discard calculations!
-     println("Final result: $finalResult")                                     
-  }
+class Results(val racePlacements: List<Int>) {
+
+fun scoreCalculation ( resultPolish: ( List<Int> ) -> Int ) {       // this is a lambda funtion
+     val finalResult = resultPolish(racePlacements)             // it has no knowledge of discards nor scoring system
+     println("Final result: $finalResult") 
+
+     // assume this function has all code to publish scores and to create the full regatta results
+     // and that is the drive for using lambdas; to specialize the scores for different needs
+     // and not having to update this function itself
 }
  
-fun resultCalculation(totalResults: MutableList<Int>, nmbrOfDiscards: Int = 0) {   // default nmbr of discards = 0
-    val sumOfAllRaces = totalResults.sum()
-	val results = Results( totalResults.sorted() )   // intitialize the class Results with a sorted list of race results
-
-    println("List of race results unprocessed: $totalResults")
-	println("Sum of all races: $sumOfAllRaces")
-	println("Nmbr of race discards: $nmbrOfDiscards")
-	println("Sorted list of race results: ${totalResults.sorted()}")
+  }
+ 
+fun lowPointScoring(racePlacements: MutableList<Int>, nmbrOfDiscards: Int = 0) {   // default nmbr of discards = 0
+    println("lowPointScoring")
 	
-	results.resultRefinement { x: List<Int> ->     // a trailing lambda, since only one parameter I can skip the parenthesis
+    val sumOfAllRaces = racePlacements.sum()
+	val results = Results(racePlacements.sorted() )   // intitialize the class Results with a sorted list of race places
+
+	results.scoreCalculation { x: List<Int> ->
 	  val lastIndex = x.count()-1
 	  var sumOfDiscards = 0
-	  for (i in 0..nmbrOfDiscards-1) {    // loop through the last race results in the sorted list, as many as race discards
-            sumOfDiscards = sumOfDiscards + x[lastIndex - i]        // loop backwards, highest race scores are at the end
+	  for (i in 0..nmbrOfDiscards-1) {   // loop through the last race results in the sorted list, as many as race discards
+            sumOfDiscards = sumOfDiscards + x[lastIndex - i]
 	  }
 
 	sumOfAllRaces - sumOfDiscards   // it needs to return an Int
-	}
+	} 
+
 }
+
+fun bonusPointScoring(racePlacements: MutableList<Int>, nmbrOfDiscards: Int = 0) {
+	println("bonusPointScoring")
+
+    val results = Results(racePlacements.sorted() )
+	var sum = 0
+
+	results.scoreCalculation { x: List<Int> ->
+          for (item in x) {
+		  when (item) {                           // transform race placement to a bonus point
+			  1 -> sum = sum+0                   // a simplification made here: third place should have 5.7
+			  2 -> sum = sum+3                   // and sixth 11.7
+			  3 -> sum = sum+6                   // Staying with a List of Ints simplifies this
+			  4 -> sum = sum+8
+			  5 -> sum = sum+10
+			  6 -> sum = sum+12
+			  7 -> sum = sum+13
+		          else -> sum = sum+item+6
+		  }
+	
+      val lastIndex = x.count()-1
+	  var sumOfDiscards = 0
+	  for (i in 0..nmbrOfDiscards-1) {   // loop through the last race results in the sorted list, as many as race discards
+          	if ( x[lastIndex - i] > 13 ) sumOfDiscards = sumOfDiscards + x[lastIndex - i] + 6
+		else if ( x[lastIndex - i] == 2) sumOfDiscards = sumOfDiscards + 3 
+         	else if ( x[lastIndex - i] == 3) sumOfDiscards = sumOfDiscards + 6 
+                else if ( x[lastIndex - i] == 4) sumOfDiscards = sumOfDiscards + 8 
+                else if ( x[lastIndex - i] == 5) sumOfDiscards = sumOfDiscards + 10 
+                else if ( x[lastIndex - i] == 6) sumOfDiscards = sumOfDiscards + 12
+                else if ( x[lastIndex - i] == 7) sumOfDiscards = sumOfDiscards + 13
+	}
+
+	sum - sumOfDiscards
+	} 
+}
+
 
 
 fun main() {
-	val totalResults = mutableListOf(12,13,7,4,3,5,6,8,15,17,9)     // this is just to test the lambdas
+	val racePlacements = mutableListOf(12,13,7,4,3,5,6,8,15,17,9)  // this is just to test the lambdas
 	val nmbrOfDiscards = 3
-	resultCalculation( totalResults, nmbrOfDiscards)
+
+	println("List of race results unprocessed: $racePlacements")
+	println("Sum of all races: ${racePlacements.sum()}")
+	println("Nmbr of race discards: $nmbrOfDiscards")
+	println("Sorted list of race results: ${racePlacements.sorted()}")
+	
+	lowPointScoring( racePlacements, nmbrOfDiscards )
+
+	bonusPointScoring( racePlacements, nmbrOfDiscards )
 }
-
-
-
-
