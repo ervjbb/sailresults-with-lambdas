@@ -2,7 +2,7 @@ class Results(val racePlacements: List<Int>) {
 
 fun scoreCalculation ( resultPolish: ( List<Int> ) -> Float ) {       // this is a lambda funtion
      val finalResult = resultPolish(racePlacements)             // it has no knowledge of discards nor scoring system
-     println("Final result: $finalResult") 
+     println("Final result: ${"%.1f".float(finalResult)}")      // put out rounded value to one decimal
 
      // assume this function has all code to publish scores and to create the full regatta results
      // and that is the drive for using lambdas; to specialize the scores for different needs
@@ -17,7 +17,7 @@ fun lowPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {   // d
     val sumOfAllRaces = racePlacements.sum()
 	val results = Results(racePlacements.sorted() )   // intitialize the class Results with a sorted list of race places
 
-	results.scoreCalculation { x: List<Int> ->
+	results.scoreCalculation { x: List<Int> ->        // this is the body of the lambda function, it is provided as trailing lambda
 	  val lastIndex = x.count()-1
 	  var sumOfDiscards = 0f
 	  for (i in 0..nmbrOfDiscards-1) {   // loop through the last race results in the sorted list, as many as race discards
