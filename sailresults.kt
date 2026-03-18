@@ -53,10 +53,10 @@ fun bonusPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {
 	  for (i in 0..nmbrOfDiscards-1) {   // loop through the last race results in the sorted list, as many as race discards
           	if ( x[lastIndex - i] > 7 ) sumOfDiscards = sumOfDiscards + x[lastIndex - i] + 6
 		    else if ( x[lastIndex - i] == 2) sumOfDiscards = sumOfDiscards + 3 
-         	else if ( x[lastIndex - i] == 3) sumOfDiscards = sumOfDiscards + 6 
+         	else if ( x[lastIndex - i] == 3) sumOfDiscards = sumOfDiscards + 5.7f
             else if ( x[lastIndex - i] == 4) sumOfDiscards = sumOfDiscards + 8 
             else if ( x[lastIndex - i] == 5) sumOfDiscards = sumOfDiscards + 10 
-            else if ( x[lastIndex - i] == 6) sumOfDiscards = sumOfDiscards + 12
+            else if ( x[lastIndex - i] == 6) sumOfDiscards = sumOfDiscards + 11.7f
             else if ( x[lastIndex - i] == 7) sumOfDiscards = sumOfDiscards + 13
 	}
 	sum - sumOfDiscards
