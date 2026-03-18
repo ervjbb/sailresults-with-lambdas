@@ -1,7 +1,7 @@
 class Results(val racePlacements: List<Int>) {
 
-fun scoreCalculation ( resultPolish: ( List<Int> ) -> Float ) {       // this is a lambda funtion
-     val finalResult = resultPolish(racePlacements)             // it has no knowledge of discards nor scoring system
+fun scoreCalculation ( resultPolish: ( List<Int> ) -> Float ) {       // this function accepts a lambda function as the only parameter
+     val finalResult = resultPolish(racePlacements)                   // it has no knowledge of discards nor scoring system
      println("Final result: ${"%.1f".format(finalResult)}") 
 
      // assume this function has all code to publish scores and to create the full regatta results
