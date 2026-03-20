@@ -11,12 +11,12 @@ fun scoreCalculation ( resultPolish: ( List<Int> ) -> Float ) {       // this fu
 }
  
 fun lowPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {   // default nmbr of discards = 0
-        println("lowPointScoring")
+    println("lowPointScoring")
 	
-        val sumOfAllRaces = racePlacements.sum()
+    val sumOfAllRaces = racePlacements.sum()
 	val results = Results(racePlacements.sorted() )   // intitialize the class Results with a sorted list of race places
 
-	results.scoreCalculation { x: List<Int> ->
+	results.scoreCalculation { x: List<Int> ->        // start of the lambda function
 	  val lastIndex = x.count()-1
 	  var sumOfDiscards = 0f
 	  for (i in 0..nmbrOfDiscards-1) {   // loop through the last race results in the sorted list, as many as race discards
@@ -37,7 +37,7 @@ fun bonusPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {
       val tempList  = mutableListOf<Float>()                  // creating a temporarty list for the BonusPoints scoring
       var bonusPoint: Float = 0f
 	  for (race in x ) {                                      // filling up the temporary list with correct bonus points
-          	if ( race > 7 ) bonusPoint = race + 6f
+          	if ( race > 7 ) bonusPoint = race + 6f            // all placements higher than 7th receive placement + 6
 		    else if ( race == 2) bonusPoint = 3f 
          	else if ( race == 3) bonusPoint = 5.7f 
             else if ( race == 4) bonusPoint = 8f 
@@ -58,7 +58,7 @@ fun bonusPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {
 
 fun main() {
 	val racePlacements = listOf(12,13,7,4,3,5,6,8,15,17,9)  // this is just to test the lambdas
-	val nmbrOfDiscards = 2
+	val nmbrOfDiscards = 1
 
 	println("List of race results unprocessed: $racePlacements")
 	println("Sum of all races: ${racePlacements.sum()}")
