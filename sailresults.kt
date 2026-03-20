@@ -2,7 +2,7 @@ class Results(val racePlacements: List<Int>) {
 
 fun scoreCalculation ( resultPolish: ( List<Int> ) -> Float ) {       // this function accepts a lambda function as the only parameter
      val finalResult = resultPolish(racePlacements)                   // it has no knowledge of discards nor scoring system
-     println("Final result: ${"%.1f".format(finalResult)}") 
+     println("Final result: ${"%.1f".format(finalResult)}")           // this rounding creates a locale dependent decimal notation, a "," in Sweden unfortunately
 
      // assume this function has all code to publish scores and to create the full regatta results
      // and that is the drive for using lambdas; to specialize the scores for different needs
@@ -58,7 +58,7 @@ fun bonusPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {
 
 fun main() {
 	val racePlacements = listOf(12,13,7,4,3,5,6,8,15,17,9)  // this is just to test the lambdas
-	val nmbrOfDiscards = 2
+	val nmbrOfDiscards = 1
 
 	println("List of race results unprocessed: $racePlacements")
 	println("Sum of all races: ${racePlacements.sum()}")
