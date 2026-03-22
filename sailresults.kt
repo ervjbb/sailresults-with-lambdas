@@ -37,13 +37,12 @@ fun bonusPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {
       val tempList  = mutableListOf<Float>()                  // creating a temporarty list for the BonusPoints scoring
       var bonusPoint: Float = 0f
 	  for (race in x ) {                                      // filling up the temporary list with correct bonus points
-          	if ( race > 7 ) bonusPoint = race + 6f            // all placements higher than 7th receive placement + 6
-		    else if ( race == 2) bonusPoint = 3f 
-         	else if ( race == 3) bonusPoint = 5.7f 
-            else if ( race == 4) bonusPoint = 8f 
-            else if ( race == 5) bonusPoint = 10f 
-            else if ( race == 6) bonusPoint = 11.7f
-            else if ( race == 7) bonusPoint = 13f
+          	if ( race > 6 ) bonusPoint = race + 6f            // All placements from position 6 and higher the point: placement + 6
+		    else if ( race == 2 ) bonusPoint = 3f 
+         	else if ( race == 3 ) bonusPoint = 5.7f 
+            else if ( race == 4 ) bonusPoint = 8f 
+            else if ( race == 5 ) bonusPoint = 10f 
+            else if ( race == 6 ) bonusPoint = 11.7f
 		    tempList.add( bonusPoint )
 	  }
       println("templist: $tempList")
