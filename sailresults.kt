@@ -11,12 +11,12 @@ fun scoreCalculation ( resultPolish: ( List<Int> ) -> Float ) {       // this fu
 }
  
 fun lowPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {   // default nmbr of discards = 0
-        println("lowPointScoring")
+    println("lowPointScoring")
 	
-        val sumOfAllRaces = racePlacements.sum()
+    val sumOfAllRaces = racePlacements.sum()
 	val results = Results(racePlacements.sorted() )   // intitialize the class Results with a sorted list of race places
 
-	results.scoreCalculation { x: List<Int> ->
+	results.scoreCalculation { x: List<Int> ->        // start of the lambda function
 	  val lastIndex = x.count()-1
 	  var sumOfDiscards = 0f
 	  for (i in 0..nmbrOfDiscards-1) {   // loop through the last race results in the sorted list, as many as race discards
