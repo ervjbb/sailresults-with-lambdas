@@ -38,7 +38,7 @@ fun bonusPointScoring(racePlacements: List<Int>, nmbrOfDiscards: Int = 0) {
       var bonusPoint: Float = 0f
 	  for (race in x ) {                                      // filling up the temporary list with correct bonus points
           	if ( race > 6 ) bonusPoint = race + 6f            // All placements from position 7 and higher the point: placement + 6
-		    else if ( race == 1 ) bonusPoint = 0f 
+		   // else if ( race == 1 ) bonusPoint = 0f     no need to test this in an ordered list; 1s will all be at the beginning and will get point 0
 		    else if ( race == 2 ) bonusPoint = 3f 
          	else if ( race == 3 ) bonusPoint = 5.7f 
             else if ( race == 4 ) bonusPoint = 8f 
