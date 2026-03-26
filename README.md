@@ -1,5 +1,5 @@
 
-This is a practical example on how to add the use of a sail racing scoring system without having to change the basic regatta management function. They key to this is the use of lambda functions in Kotlin.
+This is a practical example on how to add the use of a sail racing scoring system without having to change the basic regatta management function. The key to this is the use of lambda functions in Kotlin.
 
 The commonly used way to score sailracing is the LowPoint scoring, which assigns the same point as the placement in the race: the first boat gets the point 1, the second 2 and so forth. The boat with lowest sum of points wins. Often there is an allowance to discard the highest point in the regatta, and sometimes two or more discards are allowed.
 
