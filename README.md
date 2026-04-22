@@ -4,3 +4,9 @@ This is a practical example on how to add the use of a sail racing scoring syste
 The commonly used way to score sailracing is the LowPoint scoring, which assigns the same point as the placement in the race: the first boat gets the point 1, the second 2 and so forth. The boat with lowest sum of points wins. Often there is an allowance to discard the highest point in the regatta, and sometimes two or more discards are allowed.
 
 But in Olympics and other high level regattas it was for a long time a practice to prioritize top level race placements more. The first boat received the point 0, second 3, third 5.7, fourth 8, fifth 10, sixth 11.7, seventh and all further down the fleet the race placement + 6. It was often called HighPoint or BonusPoint scoring system. The result was given as a one decimal number.
+
+In this example we assume we have already a function which performs the aggregated regatta results among all sailors, pushes the results to different channels and can print the regatta result. This function we do not want to update frequently. Luckily it accepts a lambda function as its input parameter.
+
+We can therefore extend the functionality to support also the BonusPointScoring System (which was not originally supported) via a new lambda function.
+
+
